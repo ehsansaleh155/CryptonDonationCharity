@@ -1,1 +1,4 @@
 # CryptonDonationCharity
+
+Limitations:
+1. 

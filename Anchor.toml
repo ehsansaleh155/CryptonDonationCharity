@@ -1,6 +1,9 @@
 [features]
-seeds = false
+seeds = true
 [programs.localnet]
+crypton_donation_charity = "FAJt5bV5epF8fYd9xzv7SqkapN4Bv5dsmvEfKxYYCvro"
+
+[programs.devnet]
 crypton_donation_charity = "FAJt5bV5epF8fYd9xzv7SqkapN4Bv5dsmvEfKxYYCvro"
 
 [registry]

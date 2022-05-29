@@ -2,15 +2,10 @@ pub mod errors;
 pub mod events;
 pub mod state;
 pub mod structures;
-use crate::errors::DonationError;
-use crate::events::*;
-use crate::state::*;
+
 use crate::structures::*;
 
 use anchor_lang::prelude::*;
-use anchor_lang::solana_program::program::invoke;
-use anchor_lang::solana_program::rent;
-use anchor_lang::solana_program::system_instruction;
 
 declare_id!("FAJt5bV5epF8fYd9xzv7SqkapN4Bv5dsmvEfKxYYCvro");
 
@@ -25,16 +20,15 @@ pub mod crypton_donation_charity {
         platform_owner: Pubkey,
         starting_time: i64,
         period_n: i64,
-        commission: f32,
-        encrg_chrt: f32,
-        lim_chrt_comm_exempt: f32,
-        lim_chrt_camp_close: f32,
+        commission: u64,
+        encrg_chrt: u32,
+        lim_chrt_comm_exempt: u64,
+        lim_chrt_camp_close: u32,
         account_size: u32,
     ) -> Result<()> {
         structures::initialize(
             ctx,
             platform_owner,
-            starting_time,
             period_n,
             commission,
             encrg_chrt,
@@ -44,13 +38,32 @@ pub mod crypton_donation_charity {
         )
     }
     /*=====================================================================================*/
-    pub fn new_campaign(ctx: Context<NewCampaign>) -> Result<()> {
-        structures::new_campaign(ctx)
+    pub fn new_campaign(
+        ctx: Context<NewCampaign>,
+        campaign_owner: Pubkey,
+        starting_time: i64,
+    ) -> Result<()> {
+        structures::new_campaign(ctx, campaign_owner, starting_time)
     }
-
     /*=====================================================================================*/
-    pub fn do_donation(ctx: Context<DoDonation>, mint_bump: u8, amount: u64) -> Result<()> {
-        structures::do_donation(ctx, mint_bump, amount)
+    pub fn do_donation(
+        ctx: Context<DoDonation>,
+        campaign_owner: Pubkey,
+        referrer: Pubkey,
+        mint_bump: u8,
+        amount: u64,
+    ) -> Result<()> {
+        structures::do_donation(ctx, campaign_owner, referrer, mint_bump, amount)
+    }
+    /*=====================================================================================*/
+    pub fn airdrop(
+        ctx: Context<Airdrop>,
+        receiver: Pubkey,
+        payer: Pubkey,
+        mint_bump: u8,
+        amount: u64,
+    ) -> Result<()> {
+        structures::airdrop(ctx, receiver, payer, mint_bump, amount)
     }
     /*=====================================================================================*/
     pub fn withdraw(ctx: Context<Withdraw>) -> Result<()> {
