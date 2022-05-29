@@ -1,11 +1,14 @@
-//use crate::state::Team;
 use anchor_lang::prelude::*;
 
 #[event]
 pub struct DonationEvent {
     pub donation_bank: Pubkey,
     pub donator: Pubkey,
+    pub referrer: Pubkey,
     pub amount: u64,
+    pub rewarded: bool,
+    pub campign_top_10: bool,
+    pub platform_top_100: bool,
 }
 
 #[event]
@@ -14,13 +17,3 @@ pub struct WithdrawEvent {
     pub destination: Pubkey,
     pub amount: u64,
 }
-
-/*
-#[event]
-pub struct MatchResult {
-    pub team: Team,
-    pub nonce: u8,
-    pub aggregator_key: Pubkey,
-    pub arena_key: Pubkey,
-}
-*/

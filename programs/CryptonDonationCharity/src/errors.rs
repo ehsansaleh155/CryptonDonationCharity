@@ -6,6 +6,8 @@ pub enum DonationError {
     InvalidAmount,
     #[msg("The donation bank is empty")]
     NoFundsForWithdrawal,
+    #[msg("The donation bank is empty")]
+    InsufficientFundsForTransaction,
     //#[msg("Invalid Aggregator value returned")] //##
     //InvalidAggregatorValueReturned, //##
 }
