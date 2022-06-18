@@ -6,13 +6,16 @@ pub struct DonationEvent {
     pub donator: Pubkey,
     pub referrer: Pubkey,
     pub amount: u64,
-    pub rewarded: bool,
-    pub campign_top_10: bool,
-    pub platform_top_100: bool,
 }
 
 #[event]
-pub struct WithdrawEvent {
+pub struct TopTenRewardsEvent {
+    pub top_addresses: Vec<Pubkey>,
+    pub top_values: Vec<u64>,
+}
+
+#[event]
+pub struct CloseCampaignEvent {
     pub donation_bank: Pubkey,
     pub destination: Pubkey,
     pub amount: u64,
