@@ -322,7 +322,6 @@ pub mod crypton_donation_charity {
         )?;
         if camp_account.chrt_token_recieved >= base_account.lim_chrt_camp_close {
             camp_account.is_active = false;
-            ////////// NEED TO IMPLEMENT DISTRIBUTION OF SOLs OF THIS CAMPAIGN BETWEEN OTHERS
         }
 
         msg!("CHRT Token donated!!!");
